@@ -1,0 +1,7 @@
+"id,level,italian,japanese,pos,example_it,example_ja"
+"1,1,il libro,本,名詞,Leggo il libro.,私は本を読む。"
+"2,1,mangiare,食べる,動詞,Io mangio la mela.,私はりんごを食べる。"
+"3,1,la mela,りんご,名詞,La mela è rossa.,りんごは赤い。"
+"4,1,rosso,赤い,形容詞,Il fiore è rosso.,その花は赤い。"
+"5,2,facile,簡単な,形容詞,Questo libro si legge facilmente.,この本は簡単に読める。"
+"6,2,difficile,難しい,形容詞,Questo problema è difficile.,この問題は難しい。"
