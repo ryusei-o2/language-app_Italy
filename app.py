@@ -3,12 +3,31 @@ import pandas as pd
 import random
 
 class VocabularyData:
-    """語彙データの読み込みと問題生成の責務を担うクラス"""
+    """語彙データの読み込み、正規化、および問題生成の責務を担うクラス"""
     def __init__(self, csv_file: str):
         try:
             self.df = pd.read_csv(csv_file)
+            
+            # 1. カラム名の前後に付着したホワイトスペースの強制排除（正規化）
+            self.df.columns = self.df.columns.str.strip()
+            
+            # 2. 必須カラムの厳密な存在検証
+            required_columns = {'id', 'level', 'italian', 'japanese', 'pos', 'example_it', 'example_ja'}
+            actual_columns = set(self.df.columns)
+            
+            if not required_columns.issubset(actual_columns):
+                missing = required_columns - actual_columns
+                # 不足しているカラムと、現在認識されている全カラムを画面に出力し実行を停止する
+                st.error(f"致命的エラー: データソースのスキーマが要件を満たしていません。")
+                st.error(f"欠落しているカラム: {missing}")
+                st.warning(f"現在システムが認識しているカラム群: {actual_columns}")
+                st.stop()
+                
         except FileNotFoundError:
-            st.error("致命的エラー: 指定されたデータソースが存在しません。")
+            st.error(f"致命的エラー: 指定されたデータソース '{csv_file}' が存在しません。")
+            st.stop()
+        except Exception as e:
+            st.error(f"予期せぬパースエラーが発生しました: {e}")
             st.stop()
 
     def generate_question(self, mode: str, level: int) -> dict:
