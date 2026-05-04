@@ -122,9 +122,9 @@ class AppUI:
                     st.session_state.attempts += 1
                     if opt == q_data['correct_answer']:
                         st.session_state.score += 1
-                        st.success("正解")
+                        st.success(f"🎉 正解！: {q_data['correct_answer']}") # 緑色の演出
                     else:
-                        st.error(f"誤答。正解は: {q_data['correct_answer']}")
+                        st.error(f"❌ 誤答。正解は: {q_data['correct_answer']}") # 赤色の演出
                     
                     st.info(f"**例文:** {q_data['example_it']} \n\n **訳:** {q_data['example_ja']}")
                     st.session_state.answered = True
